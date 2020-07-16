@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS employee_tracker_db;
 CREATE DATABASE employee_tracker_db;
 USE employee_tracker_db;
 
@@ -9,9 +10,9 @@ primary key (id)
 
 create table roles (
 id int auto_increment not null,
-title varchar(30),
-salary decimal (10, 2),
-deptId int,
+title varchar(30) not null,
+salary decimal (10, 2) not null,
+deptId int not null,
 primary key (id),
 foreign key (deptId) references department(id)
 );
@@ -20,9 +21,9 @@ create table employee (
 id int auto_increment not null,
 firstName varchar(30) not null,
 lastName varchar(30) not null,
-roleId int,
-managerId int,
+roleId int not null,
+managerId int not null,
 primary key (id),
 foreign key (roleId) references roles(id),
-foreign key (managerId) references roles(title)
+foreign key (managerId) references employee(id)
 );
