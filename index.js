@@ -60,6 +60,9 @@ function mainMenu() {
       if (answer.mainAction === ADD_DEPARTMENT) {
         return addDepartment();
       }
+      if (answer.mainAction === ADD_ROLE) {
+        return addRole();
+      }
       connection.end();
     }))
     .catch((error) => {
@@ -119,7 +122,35 @@ function addDepartment() {
   })
   };
 
-
+function addRole() {
+  inquirer.prompt([
+    {
+    name: "role",
+    type: "input",
+    message: "Enter the name of the role you wish to add:"
+  },
+  {
+    name: "salary",
+    type: "input",
+    message: "Enter the new role's salary amount:"
+  },
+  {
+    name: "deptId",
+    type: "input",
+    message: "Please enter the Department ID"
+  },
+  ])
+  .then((answer) => {
+    const addRole = `INSERT INTO roles (title, salary, deptId) VALUES (?, ?, ?);`;
+    const userInput = [answer.role, answer.salary, answer.deptId];
+    connection.query(addRole, userInput, (error, response) => {
+      if (error) 
+      console.log(error);
+    })
+    console.log("New role added: " + answer.role + "!");
+    viewRoles();
+  })
+};
 
 
 
