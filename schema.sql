@@ -22,7 +22,7 @@ id int auto_increment not null,
 firstName varchar(30) not null,
 lastName varchar(30) not null,
 roleId int not null,
-managerId int not null,
+managerId int,
 primary key (id),
 foreign key (roleId) references roles(id),
 foreign key (managerId) references employee(id)
