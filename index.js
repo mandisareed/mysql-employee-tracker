@@ -36,6 +36,9 @@ const ADD_ROLE = "Add a role";
 const ADD_EMPLOYEE = "Add an employee";
 const UPDATE_EMPLOYEE_ROLE = "Update an employee's role";
 
+
+//add to mainMenu function to display table of dept, roles, 
+//and employee data (a full join!)
 function mainMenu() {
   return inquirer
     .prompt({
@@ -50,6 +53,12 @@ function mainMenu() {
       }
       if (answer.mainAction === VIEW_ROLES) {
         return viewRoles();
+      }
+      if (answer.mainAction === VIEW_EMPLOYEES) {
+        return viewEmployees();
+      }
+      if (answer.mainAction === ADD_DEPARTMENT) {
+        return addDepartment();
       }
       connection.end();
     }))
@@ -80,3 +89,25 @@ function viewRoles() {
     mainMenu();
   })
 };
+
+function viewEmployees() {
+  const allEmployees = `SELECT * FROM employee;`;
+  connection.query(allEmployees, (error, employeeRows) => {
+    if (error) {
+      throw error;
+    }
+    console.table(employeeRows);
+    mainMenu();
+  })
+};
+
+// function addDepartment() {
+//   const allEmployees = `SELECT * FROM employee;`;
+//   connection.query(allEmployees, (error, employeeRows) => {
+//     if (error) {
+//       throw error;
+//     }
+//     console.table(employeeRows);
+//     mainMenu();
+//   })
+// };
