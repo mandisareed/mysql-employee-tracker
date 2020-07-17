@@ -101,13 +101,25 @@ function viewEmployees() {
   })
 };
 
-// function addDepartment() {
-//   const allEmployees = `SELECT * FROM employee;`;
-//   connection.query(allEmployees, (error, employeeRows) => {
-//     if (error) {
-//       throw error;
-//     }
-//     console.table(employeeRows);
-//     mainMenu();
-//   })
-// };
+function addDepartment() {
+  inquirer.prompt({
+    name: "department",
+    type: "input",
+    message: "Enter the name of the department you wish to add:"
+  })
+  .then((answer) => {
+    const addDept = `INSERT INTO department (name) VALUES (?);`;
+    connection.query(addDept, answer.department, (error, response) => {
+      if (error) {
+        console.log(error);
+      }
+      console.log("New department added: " + answer.department + " !");
+      viewDepartments();
+    })
+  })
+  };
+
+
+
+
+
