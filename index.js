@@ -48,9 +48,9 @@ function mainMenu() {
       if (answer.mainAction === VIEW_DEPARTMENTS) {
         return viewDepartments();
       }
-      // if (answer.mainAction === VIEW_ROLES) {
-      //   return viewRoles();
-      // }
+      if (answer.mainAction === VIEW_ROLES) {
+        return viewRoles();
+      }
       connection.end();
     }))
     .catch((error) => {
@@ -66,6 +66,17 @@ function viewDepartments() {
       throw error;
     }
     console.table(deptRows);
+    mainMenu();
+  })
+};
+
+function viewRoles() {
+  const allRoles = `SELECT * FROM roles;`;
+  connection.query(allRoles, (error, roleRows) => {
+    if (error) {
+      throw error;
+    }
+    console.table(roleRows);
     mainMenu();
   })
 };
