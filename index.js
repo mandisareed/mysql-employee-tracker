@@ -33,7 +33,7 @@ const VIEW_ROLES = "View all roles";
 const VIEW_EMPLOYEES = "View all employees";
 const ADD_DEPARTMENT = "Add a department";
 const ADD_ROLE = "Add a role";
-const ADD_EMPLOYEE = "Add an employee";
+//const ADD_EMPLOYEE = "Add an employee";
 const UPDATE_EMPLOYEE_ROLE = "Update an employee's role";
 
 
@@ -45,7 +45,7 @@ function mainMenu() {
       name: "mainAction",
       type: "list",
       message: "Choose a task:",
-      choices: [VIEW_DEPARTMENTS, VIEW_ROLES, VIEW_EMPLOYEES, ADD_DEPARTMENT, ADD_ROLE, ADD_EMPLOYEE, UPDATE_EMPLOYEE_ROLE, "EXIT"],
+      choices: [VIEW_DEPARTMENTS, VIEW_ROLES, VIEW_EMPLOYEES, ADD_DEPARTMENT, ADD_ROLE, UPDATE_EMPLOYEE_ROLE, "EXIT"],
     })
     .then((answer => {
       if (answer.mainAction === VIEW_DEPARTMENTS) {
@@ -63,6 +63,12 @@ function mainMenu() {
       if (answer.mainAction === ADD_ROLE) {
         return addRole();
       }
+      // if (answer.mainAction === ADD_EMPLOYEE) {
+      //   return addEmployee();
+      // }
+      // if (answer.mainAction === UPDATE_EMPLOYEE_ROLE) {
+      //   return updateEmployeeRole();
+      // }
       connection.end();
     }))
     .catch((error) => {
@@ -152,5 +158,6 @@ function addRole() {
   })
 };
 
-
+// function addEmployee() {};
+// function updateEmployeeRole() {};
 
